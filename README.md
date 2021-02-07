@@ -8,7 +8,7 @@ Run the script with `sudo ./co2monitor.py /dev/hidraw0`
 
 This script is based on https://hackaday.io/project/5301-reverse-engineering-a-low-cost-usb-co-monitor/log/17909-all-your-base-are-belong-to-us and was ported to python3
 
-Issue once after insert `sudo chmod o+rw /dev/hidraw0` then you can simply run the script withou superuser permissions, which is prefered ./co2monitor.py /dev/hidraw0
+Issue once after insert `sudo chmod o+rw /dev/hidraw0` then you can simply run the script withou superuser permissions, which is prefered `./co2monitor.py /dev/hidraw0`
 
 ## Send the data of TFA AirCO2ntrol via MQTT
 
