@@ -59,18 +59,20 @@ if __name__ == "__main__":
 		if decrypted[4] != 0x0d or (sum(decrypted[:3]) & 0xff) != decrypted[3]:
 			 print (hd(data), " => ", hd(decrypted),  "Checksum error")
 		else:
-			 op = decrypted[0]
-			 val = decrypted[1] << 8 | decrypted[2]
+				op = decrypted[0]
+				val = decrypted[1] << 8 | decrypted[2]
 			
-			 values[op] = val
+				values[op] = val
 			
-			 # Output all data, mark just received value with asterisk
-			 #print (", ".join( "%s%02X: %04X %5i" % ([" ", "*"][op==k], k, v, v) for (k, v) in sorted(values.items())), "  ",)
-			 ## From http://co2meters.com/Documentation/AppNotes/AN146-RAD-0401-serial-communication.pdf
-			 if 0x50 in values:
-				 print ("CO2: %4i" % values[0x50]) 
-			 if 0x42 in values:
-				 print ("T: %2.2f" % (values[0x42]/16.0-273.15))
-			 if 0x44 in values:
-				 print ("RH: %2.2f" % (values[0x44]/100.0))
-			 print
+				# Output all data, mark just received value with asterisk
+			 	#print (", ".join( "%s%02X: %04X %5i" % ([" ", "*"][op==k], k, v, v) for (k, v) in sorted(values.items())), "  ",)
+			 	## From http://co2meters.com/Documentation/AppNotes/AN146-RAD-0401-serial-communication.pdf
+				if 0x50 in values:
+					print ("CO2: %4i" % values[0x50]) 
+				if 0x42 in values:
+					print ("T: %2.2f" % (values[0x42]/16.0-273.15))
+				if 0x44 in values:
+					print ("RH: %2.2f" % (values[0x44]/100.0))
+				if 0x41 in values:
+					print ("RH: %2.2f" % (values[0x41]/100.0))
+				print
