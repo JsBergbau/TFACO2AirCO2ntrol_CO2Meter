@@ -50,7 +50,12 @@ if __name__ == "__main__":
 	
 	while True:
 		data = list(fp.read(8))
-		decrypted = decrypt(key, data)
+		decrypted = None
+		if data[4] == 0x0d and (sum(data[:3]) & 0xff) == data[3]:
+			decrypted = data
+		else:
+			decrypted = decrypt(key, data)
+
 		if decrypted[4] != 0x0d or (sum(decrypted[:3]) & 0xff) != decrypted[3]:
 			 print (hd(data), " => ", hd(decrypted),  "Checksum error")
 		else:
