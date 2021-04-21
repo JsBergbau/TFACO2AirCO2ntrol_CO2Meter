@@ -13,4 +13,9 @@ Issue once after insert `sudo chmod o+rw /dev/hidraw0` then you can simply run t
 ## Send the data of TFA AirCO2ntrol via MQTT
 
 You can send the data of this script via MQTT with this simple commandline
-`./co2monitor.py /dev/hidraw0 | grep --line-buffered -oP  "(?<=CO2:).*" | xargs -I % bash -c 'mosquitto_pub -h <IP of MQTT Server> -m % -t /CO2 ; echo %'`
+
+`/co2monitor.py /dev/hidraw0 | grep --line-buffered -oP "(?<=CO2:).*" | tee /dev/tty | mosquitto_pub -t CO2 -h <MQTT-Server> [-u username] [-P pw] -l [-q 1]`
+
+If you don't need the CO2 level printed to console leave out the `tee` part, so 
+
+`/co2monitor.py /dev/hidraw0 | grep --line-buffered -oP "(?<=CO2:).*" | mosquitto_pub -t CO2 -h <MQTT-Server> [-u username] [-P pw] -l [-q 1]`
