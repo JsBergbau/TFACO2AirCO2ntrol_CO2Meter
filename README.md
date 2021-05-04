@@ -22,4 +22,4 @@ If you don't need the CO2 level printed to console leave out the `tee` part, so
 
 Be sure to have -q 1. Without if you do a restart of mosquitto mosquitto_pub won't notice that connection is closed and seems still sending data but no data is actually transmitted. 
 
-You can also use it with QOS 0 and xargs. However that is less efficient as mosquitto_pub is executed on every new value and has to establish a new connection on each value ./co2monitor.py /dev/hidraw0 | grep --line-buffered -oP "(?<=CO2:).*" | xargs -I % bash -c 'mosquitto_pub -h <IP of MQTT Server> -m % -t /CO2 ; echo %'
+You can also use it with QOS 0 and xargs. However that is less efficient as mosquitto_pub is executed on every new value and has to establish a new connection on each value `./co2monitor.py /dev/hidraw0 | grep --line-buffered -oP "(?<=CO2:).*" | xargs -I % bash -c 'mosquitto_pub -h <IP of MQTT Server> -m % -t /CO2 ; echo %`
