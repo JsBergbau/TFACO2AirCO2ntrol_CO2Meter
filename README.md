@@ -18,7 +18,7 @@ You can send the data of this script via MQTT with this simple commandline. Note
 
 If you don't need the CO2 level printed to console leave out the `tee` part, so 
 
-`while true; do ./co2monitor.py /dev/hidraw0 | grep --line-buffered -oP "(?<=CO2:).*" | tee /dev/tty | mosquitto_pub -t CO2 -h <MQTT-Server> [-u username] [-P pw] -l -q 1 ; done`
+`while true; do ./co2monitor.py /dev/hidraw0 | grep --line-buffered -oP "(?<=CO2:).*" | mosquitto_pub -t CO2 -h <MQTT-Server> [-u username] [-P pw] -l -q 1 ; done`
 
 Be sure to have -q 1. Without if you do a restart of mosquitto mosquitto_pub won't notice that connection is closed and seems still sending data but no data is actually transmitted. 
 
