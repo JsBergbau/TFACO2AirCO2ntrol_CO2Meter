@@ -10,8 +10,13 @@ import time
 from module import secrets
 import sys, fcntl, time
 
-mqttBroker ="mosquitfoo.example.com" 
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, "raspi-desk")
+mqttBroker ="mosquitfoo.example.com"
+clientname ="raspi-desk"
+try:
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, clientname)
+except:
+    client = mqtt.Client(clientname)
+
 client.username_pw_set(username = secrets.username, password = secrets.password)
 client.tls_set(ca_certs='/etc/ssl/certs/ca-certificates.crt')
 client.clean_session = True
